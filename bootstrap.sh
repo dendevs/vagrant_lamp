@@ -9,9 +9,9 @@ if ! [ -L /var/www ]; then
     rm -rf /var/www
     ln -fs /vagrant_src /var/www
 fi
-if ! [ -L /etc/apache2/sites-available/000-default.conf ]; then
+if ! [ -e /etc/apache2/sites-available/000-default.conf ]; then
     rm -f /etc/apache2/sites-available/000-default.conf
-    ln -fs /vagrant_config/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+    ln -fs /vagrant_config/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 fi
 systemctl start apache2
 
@@ -21,7 +21,7 @@ pecl install xdebug
 if ! [ -L /etc/php/7.0/apache2/php.ini ]; then
     rm -f /etc/php/7.0/apache2/php.ini
     ln -fs /vagrant_config/php/apache/php.ini /etc/php/7.0/apache2/php.ini
-    systemctl restart apache2
+    systemctl reload apache2
 fi
 if ! [ -L /etc/php/7.0/cli/php.ini ]; then
     rm -f /etc/php/7.0/cli/php.ini
