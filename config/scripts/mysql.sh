@@ -8,6 +8,7 @@ apt-get install -y mysql-server
 
 # user && privileges
 mysql -u root -proot -e "CREATE USER IF NOT EXISTS 'vagrant'@'%' IDENTIFIED BY 'vagrant'"
+mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS vagrant";
 mysql -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'%' IDENTIFIED BY 'vagrant' WITH GRANT OPTION; FLUSH PRIVILEGES; SET GLOBAL max_connect_errors=10000;"
 
 # allow remote connection
